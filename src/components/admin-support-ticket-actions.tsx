@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -12,13 +12,13 @@ type TicketRow = {
 
 export function AdminSupportTicketActions() {
   const [tickets, setTickets] = useState<TicketRow[]>([]);
-  const [message, setMessage] = useState("Destek talepleri yükleniyor.");
+  const [message, setMessage] = useState("Destek talepleri yÃ¼kleniyor.");
 
   async function loadTickets() {
     const supabase = createSupabaseBrowserClient();
     if (!supabase) {
       setTickets([{ id: "demo-ticket", subject: "Demo destek talebi", status: "open", created_at: new Date().toISOString() }]);
-      setMessage("Demo destek talepleri gösteriliyor.");
+      setMessage("Demo destek talepleri gÃ¶steriliyor.");
       return;
     }
 
@@ -41,7 +41,7 @@ export function AdminSupportTicketActions() {
     const supabase = createSupabaseBrowserClient();
     if (!supabase) {
       setTickets((current) => current.map((ticket) => ticket.id === id ? { ...ticket, status } : ticket));
-      setMessage("Demo modunda destek talebi güncellendi.");
+      setMessage("Demo modunda destek talebi gÃ¼ncellendi.");
       return;
     }
 
@@ -59,8 +59,8 @@ export function AdminSupportTicketActions() {
   }, []);
 
   return (
-    <section className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
-      <h2 className="text-lg font-bold">Destek Talebi Yönetimi</h2>
+    <section className="mb-6 rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
+      <h2 className="text-lg font-bold">Destek Talebi YÃ¶netimi</h2>
       <p className="mt-1 text-sm text-slate-600">{message}</p>
       <div className="mt-4 grid gap-3">
         {tickets.map((ticket) => (
@@ -68,11 +68,11 @@ export function AdminSupportTicketActions() {
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
                 <h3 className="font-semibold">{ticket.subject}</h3>
-                <p className="mt-1 text-sm text-slate-600">{ticket.status} • {new Intl.DateTimeFormat("tr-TR").format(new Date(ticket.created_at))}</p>
+                <p className="mt-1 text-sm text-slate-600">{ticket.status} â€¢ {new Intl.DateTimeFormat("tr-TR").format(new Date(ticket.created_at))}</p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button type="button" onClick={() => updateStatus(ticket.id, "open")} className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold">Açık</button>
-                <button type="button" onClick={() => updateStatus(ticket.id, "in_progress")} className="rounded-md bg-brand-600 px-3 py-2 text-sm font-semibold text-white">İşlemde</button>
+                <button type="button" onClick={() => updateStatus(ticket.id, "open")} className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 text-sm font-semibold">AÃ§Ä±k</button>
+                <button type="button" onClick={() => updateStatus(ticket.id, "in_progress")} className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98]">Ä°ÅŸlemde</button>
                 <button type="button" onClick={() => updateStatus(ticket.id, "closed")} className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white">Kapat</button>
               </div>
             </div>

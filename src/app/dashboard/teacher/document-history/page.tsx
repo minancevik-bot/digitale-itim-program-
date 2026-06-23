@@ -1,4 +1,4 @@
-import { DashboardShell } from "@/components/dashboard-shell";
+﻿import { DashboardShell } from "@/components/dashboard-shell";
 import { requireRole } from "@/lib/auth";
 import { listGeneratedDocuments } from "@/services/generated-document-service";
 
@@ -7,8 +7,8 @@ export default async function DocumentHistoryPage() {
   const documents = await listGeneratedDocuments(current?.user.id);
 
   return (
-    <DashboardShell title="Belge Geçmişim" subtitle="Kaydedilen belge ve tutanak taslakları." crumb="Belge Geçmişim" profileName={current?.profile?.full_name}>
-      <section className="rounded-lg border border-slate-200 bg-white p-5">
+    <DashboardShell title="Belge GeÃ§miÅŸim" subtitle="Kaydedilen belge ve tutanak taslaklarÄ±." crumb="Belge GeÃ§miÅŸim" profileName={current?.profile?.full_name}>
+      <section className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
         <div className="grid gap-3">
           {documents.map((document) => (
             <article key={document.id} className="rounded-md border border-slate-200 p-4">

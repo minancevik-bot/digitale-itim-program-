@@ -67,19 +67,33 @@ export function StudentList() {
 
   return (
     <>
-      <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Öğrenci ara" className="rounded-md border border-slate-300 px-3 py-2 sm:w-80" />
-        <Link href="/dashboard/teacher/students/new" className="rounded-md bg-brand-600 px-4 py-2 text-center text-sm font-semibold text-white">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Öğrenci ara"
+          className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 sm:w-80"
+        />
+        <Link
+          href="/dashboard/teacher/students/new"
+          className="rounded-lg bg-slate-900 px-5 py-3 text-center text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98]"
+        >
           Yeni öğrenci ekle
         </Link>
       </div>
-      <p className="mb-4 text-sm text-slate-500">{status}</p>
+      <p className="mb-4 text-sm leading-relaxed text-slate-500">{status}</p>
       <div className="grid gap-4 md:grid-cols-2">
         {filtered.map((student) => (
-          <Link key={student.id} href={`/dashboard/teacher/students/${student.id}`} className="rounded-lg border border-slate-200 bg-white p-5">
-            <h2 className="text-lg font-bold">{student.fullName}</h2>
-            <p className="mt-2 text-sm text-slate-600">{student.gradeLevel} • {student.schoolName}</p>
-            <p className="mt-3 text-sm text-slate-700">{student.educationNeed}</p>
+          <Link
+            key={student.id}
+            href={`/dashboard/teacher/students/${student.id}`}
+            className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-slate-50 active:scale-[0.98]"
+          >
+            <h2 className="text-lg font-semibold tracking-[0] text-slate-900">{student.fullName}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-500">
+              {student.gradeLevel} • {student.schoolName}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-500">{student.educationNeed}</p>
           </Link>
         ))}
       </div>

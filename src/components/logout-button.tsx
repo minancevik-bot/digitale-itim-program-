@@ -18,7 +18,11 @@ export function LogoutButton() {
   }
 
   return (
-    <button onClick={handleLogout} className="rounded-md border border-slate-200 p-2 text-slate-600" aria-label="Çıkış yap">
+    <button
+      onClick={handleLogout}
+      className="rounded-xl border border-slate-200/60 bg-white p-2 text-slate-600 shadow-sm transition-all duration-300 ease-out hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98]"
+      aria-label="Çıkış yap"
+    >
       <LogOut className="h-5 w-5" />
     </button>
   );

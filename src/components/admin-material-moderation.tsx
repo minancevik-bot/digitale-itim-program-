@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -13,15 +13,15 @@ type MaterialRow = {
 
 export function AdminMaterialModeration() {
   const [materials, setMaterials] = useState<MaterialRow[]>([]);
-  const [message, setMessage] = useState("Materyaller yükleniyor.");
+  const [message, setMessage] = useState("Materyaller yÃ¼kleniyor.");
 
   async function loadMaterials() {
     const supabase = createSupabaseBrowserClient();
     if (!supabase) {
       setMaterials([
-        { id: "demo-material", title: "Demo onay bekleyen materyal", category: "Dikkat Çalışmaları", status: "pending", is_premium: false }
+        { id: "demo-material", title: "Demo onay bekleyen materyal", category: "Dikkat Ã‡alÄ±ÅŸmalarÄ±", status: "pending", is_premium: false }
       ]);
-      setMessage("Demo materyaller gösteriliyor.");
+      setMessage("Demo materyaller gÃ¶steriliyor.");
       return;
     }
 
@@ -37,14 +37,14 @@ export function AdminMaterialModeration() {
     }
 
     setMaterials((data ?? []) as MaterialRow[]);
-    setMessage(data?.length ? "Materyaller listelendi." : "Onay bekleyen veya kayıtlı materyal yok.");
+    setMessage(data?.length ? "Materyaller listelendi." : "Onay bekleyen veya kayÄ±tlÄ± materyal yok.");
   }
 
   async function updateStatus(id: string, status: MaterialRow["status"]) {
     const supabase = createSupabaseBrowserClient();
     if (!supabase) {
       setMaterials((current) => current.map((material) => material.id === id ? { ...material, status } : material));
-      setMessage("Demo modunda durum güncellendi.");
+      setMessage("Demo modunda durum gÃ¼ncellendi.");
       return;
     }
 
@@ -62,8 +62,8 @@ export function AdminMaterialModeration() {
   }, []);
 
   return (
-    <section className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
-      <h2 className="text-lg font-bold">Materyal Onay Yönetimi</h2>
+    <section className="mb-6 rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
+      <h2 className="text-lg font-bold">Materyal Onay YÃ¶netimi</h2>
       <p className="mt-1 text-sm text-slate-600">{message}</p>
       <div className="mt-4 grid gap-3">
         {materials.map((material) => (
@@ -71,12 +71,12 @@ export function AdminMaterialModeration() {
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
                 <h3 className="font-semibold">{material.title}</h3>
-                <p className="mt-1 text-sm text-slate-600">{material.category ?? "Kategori yok"} • {material.status}</p>
+                <p className="mt-1 text-sm text-slate-600">{material.category ?? "Kategori yok"} â€¢ {material.status}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <button type="button" onClick={() => updateStatus(material.id, "approved")} className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white">Onayla</button>
                 <button type="button" onClick={() => updateStatus(material.id, "rejected")} className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white">Reddet</button>
-                <button type="button" onClick={() => updateStatus(material.id, "pending")} className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold">Beklet</button>
+                <button type="button" onClick={() => updateStatus(material.id, "pending")} className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 text-sm font-semibold">Beklet</button>
               </div>
             </div>
           </article>

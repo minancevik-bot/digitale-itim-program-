@@ -1,4 +1,4 @@
-import { DashboardShell } from "@/components/dashboard-shell";
+﻿import { DashboardShell } from "@/components/dashboard-shell";
 import { requireRole } from "@/lib/auth";
 import { getTeacherLicense } from "@/services/license-service";
 
@@ -11,21 +11,21 @@ export default async function LicensePage() {
 
   const items = [
     `Mevcut paket: ${license.licensePackage}`,
-    `Kalan BEP hakkı: ${license.bepQuota}`,
-    `Kalan evrak hakkı: ${license.documentQuota}`,
-    `Üyelik bitişi: ${expiresAt}`
+    `Kalan BEP hakkÄ±: ${license.bepQuota}`,
+    `Kalan evrak hakkÄ±: ${license.documentQuota}`,
+    `Ãœyelik bitiÅŸi: ${expiresAt}`
   ];
 
   return (
     <DashboardShell title="Lisans / Paket Bilgim" crumb="Lisans / Paket Bilgim" profileName={current?.profile?.full_name}>
       <div className="grid gap-4 md:grid-cols-4">
         {items.map((item) => (
-          <div key={item} className="rounded-lg border border-slate-200 bg-white p-5 font-semibold">{item}</div>
+          <div key={item} className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] font-semibold">{item}</div>
         ))}
       </div>
-      <button className="mt-5 rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white">Paket yükselt</button>
-      <div className="mt-5 rounded-lg border border-slate-200 bg-white p-5 text-slate-600">
-        Ödeme entegrasyonu bu MVP kapsamında kapalıdır. Paket verileri Supabase teacher_profiles ve packages tablolarına hazırlandı.
+      <button className="mt-5 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98]">Paket yÃ¼kselt</button>
+      <div className="mt-5 rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] text-slate-600">
+        Ã–deme entegrasyonu bu MVP kapsamÄ±nda kapalÄ±dÄ±r. Paket verileri Supabase teacher_profiles ve packages tablolarÄ±na hazÄ±rlandÄ±.
       </div>
     </DashboardShell>
   );

@@ -1,4 +1,4 @@
-import { DashboardShell } from "@/components/dashboard-shell";
+﻿import { DashboardShell } from "@/components/dashboard-shell";
 import { SupportForm } from "@/components/support-form";
 import { requireRole } from "@/lib/auth";
 import { listSupportTickets } from "@/services/support-service";
@@ -11,8 +11,8 @@ export default async function SupportPage() {
     <DashboardShell title="Destek" crumb="Destek" profileName={current?.profile?.full_name}>
       <div className="grid gap-5 lg:grid-cols-2">
         <SupportForm />
-        <section className="rounded-lg border border-slate-200 bg-white p-5">
-          <h2 className="font-bold">Önceki destek talepleri</h2>
+        <section className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
+          <h2 className="font-bold">Ã–nceki destek talepleri</h2>
           <div className="mt-4 space-y-3">
             {tickets.map((ticket) => (
               <article key={ticket.id} className="rounded-md border border-slate-200 p-4">
@@ -25,7 +25,7 @@ export default async function SupportPage() {
             ))}
           </div>
           <div className="mt-5 rounded-md bg-slate-50 p-4 text-sm text-slate-600">
-            Sık sorulan sorular alanı sonraki içerik yönetimi aşamasında genişletilecek.
+            SÄ±k sorulan sorular alanÄ± sonraki iÃ§erik yÃ¶netimi aÅŸamasÄ±nda geniÅŸletilecek.
           </div>
         </section>
       </div>

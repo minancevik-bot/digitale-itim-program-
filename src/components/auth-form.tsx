@@ -6,6 +6,11 @@ import { useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import type { UserRole } from "@/lib/types";
 
+const inputClass =
+  "mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10";
+
+const labelClass = "block text-sm font-medium text-slate-700";
+
 function rolePath(role: UserRole) {
   if (role === "admin") return "/dashboard/admin";
   if (role === "parent") return "/dashboard/parent";
@@ -49,19 +54,47 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-2xl font-bold">Giriş yap</h1>
-      <p className="mt-2 text-sm text-slate-600">Supabase bilgileri yoksa demo panele yönlendirilir.</p>
-      <label className="mt-5 block text-sm font-medium">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full rounded-2xl border border-slate-200/60 bg-white p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:p-12"
+    >
+      <h1 className="text-2xl font-bold tracking-[0] text-slate-900">Giriş yap</h1>
+      <p className="mb-8 mt-2 text-sm leading-relaxed text-slate-500">
+        Hesabınıza girin ve BEP çalışma alanınıza kaldığınız yerden devam edin.
+      </p>
+
+      <label className={labelClass}>
         E-posta
-        <input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2" />
+        <input
+          required
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          className={inputClass}
+        />
       </label>
-      <label className="mt-4 block text-sm font-medium">
+
+      <label className={`${labelClass} mt-5`}>
         Şifre
-        <input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2" />
+        <input
+          required
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          className={inputClass}
+        />
       </label>
-      {message ? <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-900">{message}</p> : null}
-      <button disabled={isSubmitting} className="mt-5 w-full rounded-md bg-brand-600 px-4 py-2 font-semibold text-white disabled:opacity-60">
+
+      {message ? (
+        <p className="mt-5 rounded-lg border border-slate-200/60 bg-slate-50 p-3 text-sm leading-relaxed text-slate-600">
+          {message}
+        </p>
+      ) : null}
+
+      <button
+        disabled={isSubmitting}
+        className="mt-6 w-full rounded-lg bg-slate-900 py-3 text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98] disabled:opacity-60"
+      >
         {isSubmitting ? "Giriş yapılıyor..." : "Giriş yap"}
       </button>
     </form>
@@ -121,38 +154,79 @@ export function RegisterForm({ initialRole }: { initialRole: UserRole }) {
       return;
     }
 
-    setMessage("Kayıt alındı. Supabase e-posta doğrulaması açıksa gelen kutusundan hesabı onaylayın.");
+    setMessage("Kayıt alındı. E-posta doğrulaması açıksa gelen kutusundan hesabınızı onaylayın.");
     setIsSubmitting(false);
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-2xl font-bold">Kayıt ol</h1>
-      <p className="mt-2 text-sm text-slate-600">Seçilen rol profil kaydına işlenir ve giriş sonrası ilgili panele yönlendirir.</p>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <label className="rounded-md border border-slate-300 p-4">
-          <input className="mr-2" type="radio" name="role" checked={role === "teacher"} onChange={() => setRole("teacher")} />
-          Öğretmenim
-        </label>
-        <label className="rounded-md border border-slate-300 p-4">
-          <input className="mr-2" type="radio" name="role" checked={role === "parent"} onChange={() => setRole("parent")} />
-          Veliyim
-        </label>
+    <form
+      onSubmit={handleSubmit}
+      className="w-full rounded-2xl border border-slate-200/60 bg-white p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:p-12"
+    >
+      <h1 className="text-2xl font-bold tracking-[0] text-slate-900">Kayıt ol</h1>
+      <p className="mb-8 mt-2 text-sm leading-relaxed text-slate-500">
+        Rolünüzü seçin; giriş sonrası sizi doğru çalışma alanına yönlendirelim.
+      </p>
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        {[
+          ["teacher", "Öğretmenim"],
+          ["parent", "Veliyim"]
+        ].map(([value, label]) => (
+          <label
+            key={value}
+            className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-700 transition-all duration-300 ease-out hover:border-slate-900/30"
+          >
+            <input
+              className="mr-2"
+              type="radio"
+              name="role"
+              checked={role === value}
+              onChange={() => setRole(value as UserRole)}
+            />
+            {label}
+          </label>
+        ))}
       </div>
-      <label className="mt-5 block text-sm font-medium">
+
+      <label className={`${labelClass} mt-5`}>
         Ad soyad
-        <input required value={fullName} onChange={(event) => setFullName(event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2" />
+        <input required value={fullName} onChange={(event) => setFullName(event.target.value)} className={inputClass} />
       </label>
-      <label className="mt-4 block text-sm font-medium">
+
+      <label className={`${labelClass} mt-5`}>
         E-posta
-        <input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2" />
+        <input
+          required
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          className={inputClass}
+        />
       </label>
-      <label className="mt-4 block text-sm font-medium">
+
+      <label className={`${labelClass} mt-5`}>
         Şifre
-        <input required minLength={6} type="password" value={password} onChange={(event) => setPassword(event.target.value)} className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2" />
+        <input
+          required
+          minLength={6}
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          className={inputClass}
+        />
       </label>
-      {message ? <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-900">{message}</p> : null}
-      <button disabled={isSubmitting} className="mt-5 w-full rounded-md bg-brand-600 px-4 py-2 font-semibold text-white disabled:opacity-60">
+
+      {message ? (
+        <p className="mt-5 rounded-lg border border-slate-200/60 bg-slate-50 p-3 text-sm leading-relaxed text-slate-600">
+          {message}
+        </p>
+      ) : null}
+
+      <button
+        disabled={isSubmitting}
+        className="mt-6 w-full rounded-lg bg-slate-900 py-3 text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98] disabled:opacity-60"
+      >
         {isSubmitting ? "Hesap oluşturuluyor..." : "Hesap oluştur"}
       </button>
     </form>

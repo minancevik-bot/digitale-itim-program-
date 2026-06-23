@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { FormEvent } from "react";
 import { useState } from "react";
@@ -17,7 +17,7 @@ export function SupportForm() {
 
     const supabase = createSupabaseBrowserClient();
     if (!supabase) {
-      setStatus("Demo modunda destek talebi simüle edildi.");
+      setStatus("Demo modunda destek talebi simÃ¼le edildi.");
       setSubject("");
       setMessage("");
       setIsSubmitting(false);
@@ -28,7 +28,7 @@ export function SupportForm() {
     const user = userResult.user;
 
     if (!user) {
-      setStatus("Destek talebi oluşturmak için giriş yapmalısınız.");
+      setStatus("Destek talebi oluÅŸturmak iÃ§in giriÅŸ yapmalÄ±sÄ±nÄ±z.");
       setIsSubmitting(false);
       return;
     }
@@ -45,20 +45,20 @@ export function SupportForm() {
       return;
     }
 
-    setStatus("Destek talebi oluşturuldu.");
+    setStatus("Destek talebi oluÅŸturuldu.");
     setSubject("");
     setMessage("");
     setIsSubmitting(false);
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-lg border border-slate-200 bg-white p-5">
-      <h2 className="font-bold">Destek talebi oluştur</h2>
-      <input required value={subject} onChange={(event) => setSubject(event.target.value)} placeholder="Konu" className="mt-4 w-full rounded-md border border-slate-300 px-3 py-2" />
-      <textarea required value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Mesaj" rows={6} className="mt-4 w-full rounded-md border border-slate-300 px-3 py-2" />
+    <form onSubmit={handleSubmit} className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
+      <h2 className="font-bold">Destek talebi oluÅŸtur</h2>
+      <input required value={subject} onChange={(event) => setSubject(event.target.value)} placeholder="Konu" className="mt-4 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10" />
+      <textarea required value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Mesaj" rows={6} className="mt-4 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10" />
       {status ? <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-900">{status}</p> : null}
-      <button disabled={isSubmitting} className="mt-4 rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
-        {isSubmitting ? "Gönderiliyor..." : "Gönder"}
+      <button disabled={isSubmitting} className="mt-4 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98] disabled:opacity-60">
+        {isSubmitting ? "GÃ¶nderiliyor..." : "GÃ¶nder"}
       </button>
     </form>
   );

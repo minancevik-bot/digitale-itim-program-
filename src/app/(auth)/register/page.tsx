@@ -1,5 +1,4 @@
 import { RegisterForm } from "@/components/auth-form";
-import { SiteHeader } from "@/components/site-header";
 import type { UserRole } from "@/lib/types";
 
 export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ role?: string }> }) {
@@ -7,11 +6,10 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
   const selectedRole: UserRole = params.role === "parent" ? "parent" : "teacher";
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <SiteHeader />
-      <main className="mx-auto max-w-lg px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-[#FAFAFA] px-4 py-16">
+      <div className="w-full max-w-lg">
         <RegisterForm initialRole={selectedRole} />
-      </main>
+      </div>
     </div>
   );
 }

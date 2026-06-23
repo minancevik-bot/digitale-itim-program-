@@ -1,16 +1,20 @@
 import { Suspense } from "react";
 import { LoginForm } from "@/components/auth-form";
-import { SiteHeader } from "@/components/site-header";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <SiteHeader />
-      <main className="mx-auto max-w-md px-4 py-12">
-        <Suspense fallback={<div className="rounded-lg border border-slate-200 bg-white p-6">Form yükleniyor...</div>}>
+    <div className="flex min-h-screen items-center justify-center bg-[#FAFAFA] px-4 py-16">
+      <div className="w-full max-w-md">
+        <Suspense
+          fallback={
+            <div className="rounded-2xl border border-slate-200/60 bg-white p-10 text-sm text-slate-500 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+              Form yükleniyor...
+            </div>
+          }
+        >
           <LoginForm />
         </Suspense>
-      </main>
+      </div>
     </div>
   );
 }

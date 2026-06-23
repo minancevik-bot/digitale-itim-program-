@@ -92,7 +92,7 @@ export function GlobalSearch() {
 
   return (
     <div className="relative flex-1">
-      <div className="flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500">
+      <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500 transition-all duration-300 ease-out focus-within:border-slate-900 focus-within:ring-2 focus-within:ring-slate-900/10">
         <Search className="h-4 w-4" />
         <input
           value={query}
@@ -102,17 +102,17 @@ export function GlobalSearch() {
         />
       </div>
       {results.length ? (
-        <div className="absolute left-0 right-0 top-12 z-20 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft">
+        <div className="absolute left-0 right-0 top-14 z-20 overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           {results.map((result) => (
             <button
               key={`${result.type}-${result.href}-${result.label}`}
               type="button"
               onClick={() => goToResult(result.href)}
-              className="block w-full border-b border-slate-100 px-4 py-3 text-left last:border-b-0 hover:bg-slate-50"
+              className="block w-full border-b border-slate-100 px-4 py-3 text-left transition-all duration-300 ease-out last:border-b-0 hover:bg-slate-50 active:scale-[0.98]"
             >
               <div className="flex items-center justify-between gap-3">
                 <span className="font-semibold text-slate-900">{result.label}</span>
-                <span className="rounded-full bg-brand-50 px-2 py-1 text-xs font-semibold text-brand-700">{result.type}</span>
+                <span className="rounded-full border border-slate-200/60 bg-slate-50 px-2 py-1 text-xs font-semibold text-slate-500">{result.type}</span>
               </div>
               <p className="mt-1 line-clamp-1 text-xs text-slate-500">{result.description}</p>
             </button>

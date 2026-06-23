@@ -20,26 +20,26 @@ export default async function AdminModulePage({ params }: { params: Promise<{ mo
       {module === "law-contents" ? <AdminLawContentForm /> : null}
       {module === "materials" ? <AdminMaterialModeration /> : null}
       {module === "support-tickets" ? <AdminSupportTicketActions /> : null}
-      <section className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <section className="overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-left text-sm">
-            <thead className="bg-slate-50 text-slate-600">
+            <thead className="bg-slate-50 text-slate-500">
               <tr>
                 {section.columns.map((column) => (
-                  <th key={column} className="px-4 py-3 font-semibold">{column}</th>
+                  <th key={column} className="px-5 py-4 font-semibold">{column}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {rows.length ? rows.map((row, index) => (
-                <tr key={index} className="border-t border-slate-100">
+                <tr key={index} className="border-b border-slate-100 last:border-b-0">
                   {section.columns.map((column) => (
-                    <td key={column} className="px-4 py-3 text-slate-700">{String(row[column] ?? "-")}</td>
+                    <td key={column} className="px-5 py-4 text-slate-600">{String(row[column] ?? "-")}</td>
                   ))}
                 </tr>
               )) : (
                 <tr>
-                  <td colSpan={section.columns.length} className="px-4 py-8 text-center text-slate-500">
+                  <td colSpan={section.columns.length} className="px-5 py-10 text-center text-slate-500">
                     Bu bölümde henüz kayıt yok veya RLS erişimi kayıtları göstermiyor.
                   </td>
                 </tr>

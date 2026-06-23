@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Document, HeadingLevel, Packer, Paragraph, TextRun } from "docx";
 import { useEffect, useMemo, useState } from "react";
@@ -112,7 +112,7 @@ export function DocumentWorkflow({ documentType }: { documentType: string }) {
 
     const supabase = createSupabaseBrowserClient();
     if (!supabase) {
-      setMessage("Demo modunda belge kaydı simüle edildi. Supabase env değerleri girildiğinde generated_documents tablosuna yazılır.");
+      setMessage("Demo modunda belge kaydÄ± simÃ¼le edildi. Supabase env deÄŸerleri girildiÄŸinde generated_documents tablosuna yazÄ±lÄ±r.");
       setIsSaving(false);
       return;
     }
@@ -121,7 +121,7 @@ export function DocumentWorkflow({ documentType }: { documentType: string }) {
     const user = userResult.user;
 
     if (!user) {
-      setMessage("Belge kaydetmek için giriş yapmalısınız.");
+      setMessage("Belge kaydetmek iÃ§in giriÅŸ yapmalÄ±sÄ±nÄ±z.");
       setIsSaving(false);
       return;
     }
@@ -143,7 +143,7 @@ export function DocumentWorkflow({ documentType }: { documentType: string }) {
       return;
     }
 
-    setMessage("Belge taslağı kaydedildi.");
+    setMessage("Belge taslaÄŸÄ± kaydedildi.");
     setIsSaving(false);
   }
 
@@ -178,40 +178,40 @@ export function DocumentWorkflow({ documentType }: { documentType: string }) {
 
   return (
     <div className="grid gap-5 lg:grid-cols-[1fr_1fr]">
-      <form className="rounded-lg border border-slate-200 bg-white p-5">
+      <form className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
         <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
             <h2 className="text-lg font-bold">{isBepDocument(documentType) ? "BEP belge bilgileri" : "Belge bilgileri"}</h2>
             <p className="mt-1 text-sm text-slate-600">
               {isBepDocument(documentType)
-                ? "Form, örnek Word BEP dosyasındaki bölüm sırasına göre düzenlendi."
-                : "Form, önizleme, kaydetme ve Word/PDF indirme akışı için hazırlandı."}
+                ? "Form, Ã¶rnek Word BEP dosyasÄ±ndaki bÃ¶lÃ¼m sÄ±rasÄ±na gÃ¶re dÃ¼zenlendi."
+                : "Form, Ã¶nizleme, kaydetme ve Word/PDF indirme akÄ±ÅŸÄ± iÃ§in hazÄ±rlandÄ±."}
             </p>
           </div>
           {isBepDocument(documentType) ? (
-            <a href="/templates/ornek-bep.docx" className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold">
-              Örnek BEP Word
+            <a href="/templates/ornek-bep.docx" className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 text-sm font-semibold">
+              Ã–rnek BEP Word
             </a>
           ) : null}
         </div>
 
         {isBepDocument(documentType) ? (
           <div className="mt-5 rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-            Tanı/engel ve sağlık bilgileri hassas veridir. Açık rıza ve KVKK süreçleri tamamlanmadan gerçek kişi verileriyle kullanılmamalıdır.
+            TanÄ±/engel ve saÄŸlÄ±k bilgileri hassas veridir. AÃ§Ä±k rÄ±za ve KVKK sÃ¼reÃ§leri tamamlanmadan gerÃ§ek kiÅŸi verileriyle kullanÄ±lmamalÄ±dÄ±r.
           </div>
         ) : null}
 
         <div className="mt-5 space-y-6">
           <section>
-            <h3 className="mb-3 rounded-md bg-slate-50 px-3 py-2 text-sm font-bold text-slate-800">Öğrenci Eşleştirme</h3>
+            <h3 className="mb-3 rounded-md bg-slate-50 px-3 py-2 text-sm font-bold text-slate-800">Ã–ÄŸrenci EÅŸleÅŸtirme</h3>
             <label className="block text-sm font-medium text-slate-700">
-              Kayıtlı öğrenci seç
+              KayÄ±tlÄ± Ã¶ÄŸrenci seÃ§
               <select
                 value={selectedStudentId}
                 onChange={(event) => handleStudentSelect(event.target.value)}
-                className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-brand-600"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none focus:border-slate-900"
               >
-                <option value="">Öğrenci seçmeden devam et</option>
+                <option value="">Ã–ÄŸrenci seÃ§meden devam et</option>
                 {students.map((student) => (
                   <option key={student.id} value={student.id}>{student.fullName}</option>
                 ))}
@@ -229,7 +229,7 @@ export function DocumentWorkflow({ documentType }: { documentType: string }) {
                       <textarea
                         required={field.required}
                         rows={3}
-                        className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-brand-600"
+                        className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none focus:border-slate-900"
                         value={values[field.name] ?? ""}
                         onChange={(event) => setValues((current) => ({ ...current, [field.name]: event.target.value }))}
                       />
@@ -237,7 +237,7 @@ export function DocumentWorkflow({ documentType }: { documentType: string }) {
                       <input
                         required={field.required}
                         type={field.type ?? "text"}
-                        className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-brand-600"
+                        className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none focus:border-slate-900"
                         value={values[field.name] ?? ""}
                         onChange={(event) => setValues((current) => ({ ...current, [field.name]: event.target.value }))}
                       />
@@ -250,19 +250,19 @@ export function DocumentWorkflow({ documentType }: { documentType: string }) {
         </div>
         {message ? <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-900">{message}</p> : null}
         <div className="mt-5 flex flex-wrap gap-3">
-          <button type="button" onClick={saveDraft} disabled={isSaving} className="rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
+          <button type="button" onClick={saveDraft} disabled={isSaving} className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98] disabled:opacity-60">
             {isSaving ? "Kaydediliyor..." : "Kaydet"}
           </button>
-          <button type="button" onClick={downloadWordDraft} className="rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold">
+          <button type="button" onClick={downloadWordDraft} className="rounded-lg border border-slate-200/60 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm transition-all duration-300 ease-out hover:bg-slate-50 active:scale-[0.98]">
             Word indir
           </button>
-          <button type="button" onClick={printPdfDraft} className="rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold">
+          <button type="button" onClick={printPdfDraft} className="rounded-lg border border-slate-200/60 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm transition-all duration-300 ease-out hover:bg-slate-50 active:scale-[0.98]">
             PDF indir
           </button>
         </div>
       </form>
-      <section className="rounded-lg border border-slate-200 bg-white p-5">
-        <h2 className="text-lg font-bold">Önizleme</h2>
+      <section className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
+        <h2 className="text-lg font-bold">Ã–nizleme</h2>
         <pre className="mt-4 min-h-80 whitespace-pre-wrap rounded-md bg-slate-50 p-4 text-sm leading-6 text-slate-700">
           {preview}
         </pre>

@@ -12,7 +12,7 @@ const fields = [
   { key: "grade_level", label: "Sınıf düzeyi", required: false, type: "text" },
   { key: "school_name", label: "Okul adı", required: false, type: "text" },
   { key: "student_status", label: "Öğrenci durumu", required: false, type: "text" },
-  { key: "diagnosis_info", label: "Engel/tanı bilgisi", required: false, type: "text" },
+  { key: "diagnosis_info", label: "Tanı bilgisi", required: false, type: "text" },
   { key: "education_need", label: "Eğitim ihtiyacı", required: false, type: "text" },
   { key: "parent_name", label: "Veli adı", required: false, type: "text" },
   { key: "parent_phone", label: "Veli telefonu", required: false, type: "text" },
@@ -22,6 +22,9 @@ const fields = [
 type FormValues = Record<(typeof fields)[number]["key"], string>;
 
 const emptyValues = Object.fromEntries(fields.map((field) => [field.key, ""])) as FormValues;
+
+const inputClass =
+  "mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition-all duration-300 ease-out focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10";
 
 function valuesFromStudent(student?: Student): FormValues {
   if (!student) return emptyValues;
@@ -89,11 +92,14 @@ export function StudentForm({ student, mode = "create" }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-lg border border-slate-200 bg-white p-5">
-      <div className="mb-5 rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-        Tanı/engel bilgisi hassas veridir. Bu sistem tanı koymaz, tedavi önermez ve veriler yalnızca eğitimsel planlama amacıyla işlenmelidir.
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
+    >
+      <div className="mb-6 rounded-xl border border-slate-200/60 bg-slate-50 p-4 text-sm leading-relaxed text-slate-500">
+        Tanı bilgisi hassas veridir. Bu sistem tanı koymaz, tedavi önermez ve veriler yalnızca eğitimsel planlama amacıyla işlenmelidir.
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {fields.map((field) => (
           <label key={field.key} className="block text-sm font-medium text-slate-700">
             {field.label}
@@ -102,13 +108,20 @@ export function StudentForm({ student, mode = "create" }: Props) {
               type={field.type}
               value={values[field.key]}
               onChange={(event) => setValues((current) => ({ ...current, [field.key]: event.target.value }))}
-              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
+              className={inputClass}
             />
           </label>
         ))}
       </div>
-      {message ? <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-900">{message}</p> : null}
-      <button disabled={isSubmitting} className="mt-5 rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
+      {message ? (
+        <p className="mt-5 rounded-lg border border-slate-200/60 bg-slate-50 p-3 text-sm leading-relaxed text-slate-600">
+          {message}
+        </p>
+      ) : null}
+      <button
+        disabled={isSubmitting}
+        className="mt-6 rounded-lg bg-slate-900 px-5 py-3 text-sm font-medium text-white shadow-sm transition-all duration-300 ease-out hover:bg-slate-800 active:scale-[0.98] disabled:opacity-60"
+      >
         {isSubmitting ? "Kaydediliyor..." : isEdit ? "Güncelle" : "Kaydet"}
       </button>
     </form>
