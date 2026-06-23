@@ -4,24 +4,40 @@
 
 :root {
   color-scheme: light;
-  --background: #fafafa;
+  --background: #FAFAFA;
   --foreground: #0f172a;
-  --selection-background: #c7d2fe;
-  --selection-foreground: #312e81;
 }
 
 html {
   scroll-behavior: smooth;
   background: var(--background);
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
 * {
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
 ::selection {
-  background: var(--selection-background);
-  color: var(--selection-foreground);
+  background-color: #cbd5e1;
+  color: #0f172a;
 }
 
 body {
