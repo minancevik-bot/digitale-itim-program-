@@ -139,13 +139,13 @@ function HeroSection() {
 
         <h1 className="mx-auto max-w-5xl text-5xl font-extrabold leading-[0.98] text-slate-950 sm:text-6xl lg:text-7xl xl:text-8xl">
           <span className="bg-gradient-to-r from-slate-950 via-indigo-700 to-violet-600 bg-clip-text text-transparent">
-            Eğitimde Evrak Yükünü Hafifletin
+            Evrak Değil, Eğitime Odaklanın.
           </span>
-          <span className="block">Öğrencinize Odaklanın.</span>
+          <span className="block">Gerisini Bize Bırakın.</span>
         </h1>
 
         <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-500 sm:text-xl">
-          Kaba değerlendirmeden BEP planına, materyal havuzundan RAM rehberliğine kadar tüm süreçler tek, sakin ve güvenilir bir dijital platformda.
+          Saniyeler içinde hazırlanan BEP planları ve binlerce ders materyali ile öğretmenlerin hayatını kolaylaştırıyoruz. Velilerimizi ise hak arayışında, bilgi paylaşımında ve uzman seçiminde destekleyen dev bir ekosistemde buluşturuyoruz.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -153,14 +153,14 @@ function HeroSection() {
             href="/register?role=teacher"
             className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-indigo-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_18px_60px_rgb(79,70,229,0.28)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-indigo-500 sm:w-auto"
           >
-            Öğretmen Olarak Ücretsiz Başla
+            Öğretmen Olarak Başla
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
             href="/parents"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/70 px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:text-indigo-700 sm:w-auto"
           >
-            Veliler İçin Rehberi İncele
+            Veli Topluluğuna Katıl
             <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
